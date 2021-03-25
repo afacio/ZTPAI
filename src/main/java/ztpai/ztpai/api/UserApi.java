@@ -2,19 +2,19 @@ package ztpai.ztpai.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ztpai.ztpai.manager.UserManager;
+import ztpai.ztpai.manager.UserService;
 import ztpai.ztpai.models.User;
 
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
-public class UserApi {
+@RequestMapping("/api/user")
+public class  UserApi {
 
-    private UserManager user;
+    private UserService user;
 
     @Autowired
-    public UserApi(UserManager user) {
+    public UserApi(UserService user) {
         this.user = user;
     }
 
