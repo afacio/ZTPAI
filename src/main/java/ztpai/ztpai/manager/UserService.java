@@ -34,10 +34,4 @@ public class UserService {
     public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
-
-    @EventListener(ApplicationReadyEvent.class)
-    public void fillDB() {
-        save(new User("adas.priv@gmail.com", "haslo123", "afacio"));
-        save(new User("a.facisz@gmail.com", "qwerty123", "Facisz"));
-    }
 }
