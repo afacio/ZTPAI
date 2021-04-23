@@ -18,27 +18,27 @@ public class  UserApi {
         this.user = user;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/getUser")
     public Iterable<User> getAll() {
         return user.getAll();
     }
 
-    @GetMapping
+    @GetMapping("/getUser/byId")
     public Optional<User> getById(@RequestParam Long index) {
         return user.findById(index);
     }
 
-    @PostMapping
+    @PostMapping("/addUser")
     public User save(@RequestBody User user){
         return this.user.save(user);
     }
 
-    @PutMapping
+    @PutMapping("/updateUser")
     public User updateUser(@RequestBody User user){
          return this.user.save(user);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/deleteUser")
     public void deleteUser(@RequestParam Long index) {
         user.deleteById(index);
     }
