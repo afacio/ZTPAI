@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ztpai.ztpai.manager.UserService;
 import ztpai.ztpai.models.User;
+import ztpai.ztpai.repository.UserRepository;
 
 import java.util.Optional;
 
@@ -11,35 +12,35 @@ import java.util.Optional;
 @RequestMapping("/api/user")
 public class  UserApi {
 
-    private UserService user;
+    private UserRepository userRepository;
 
     @Autowired
-    public UserApi(UserService user) {
-        this.user = user;
+    public UserApi(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/getUser")
     public Iterable<User> getAll() {
-        return user.getAll();
+        return userRepository.findAll();
     }
 
     @GetMapping("/getUser/byId")
     public Optional<User> getById(@RequestParam Long index) {
-        return user.findById(index);
+        return userRepository.findById(index);
     }
 
     @PostMapping("/addUser")
     public User save(@RequestBody User user){
-        return this.user.save(user);
+        return this.userRepository.save(user);
     }
 
     @PutMapping("/updateUser")
     public User updateUser(@RequestBody User user){
-         return this.user.save(user);
+         return this.userRepository.save(user);
     }
 
     @DeleteMapping("/deleteUser")
     public void deleteUser(@RequestParam Long index) {
-        user.deleteById(index);
+        userRepository.deleteById(index);
     }
 }
