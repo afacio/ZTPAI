@@ -1,9 +1,7 @@
 package ztpai.ztpai.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Forum extends Template {
@@ -14,6 +12,10 @@ public class Forum extends Template {
 
     private String title;
     private String gameAbout;
+
+    @OneToMany
+    @JoinColumn(name = "topicSet")
+    private Set<Topic> topicSet;
 
     public Forum() {
     }
@@ -48,4 +50,11 @@ public class Forum extends Template {
         this.gameAbout = gameAbout;
     }
 
+    public Set<Topic> getTopicSet() {
+        return topicSet;
+    }
+
+    public void setTopicSet(Set<Topic> topicSet) {
+        this.topicSet = topicSet;
+    }
 }
