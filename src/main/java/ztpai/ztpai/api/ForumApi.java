@@ -17,27 +17,27 @@ public class ForumApi {
     public ForumApi(ForumRepository forumRepository) {
         this.forumRepository = forumRepository;
     }
-    @GetMapping("/all")
+    @GetMapping("/getForum")
     public Iterable<Forum> getAll() {
         return forumRepository.findAll();
     }
 
-    @GetMapping
+    @GetMapping("/getForum/byId")
     public Optional<Forum> getById(@RequestParam Long index) {
         return forumRepository.findById(index);
     }
 
-    @PostMapping
+    @PostMapping("/addForum")
     public Forum save(@RequestBody Forum forum){
         return this.forumRepository.save(forum);
     }
 
-    @PutMapping
+    @PutMapping("/updateForum")
     public Forum updateForum(@RequestBody Forum forum){
         return this.forumRepository.save(forum);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/deleteForum")
     public void deleteForum(@RequestParam Long index) {
         forumRepository.deleteById(index);
     }
