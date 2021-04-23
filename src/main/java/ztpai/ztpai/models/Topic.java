@@ -1,9 +1,7 @@
 package ztpai.ztpai.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Topic extends Template {
@@ -11,6 +9,10 @@ public class Topic extends Template {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
+
+    @OneToMany
+    @JoinColumn(name = "postSet")
+    private Set<Post> postSet;
 
     public Topic() {
     }
@@ -27,4 +29,11 @@ public class Topic extends Template {
         this.id = id;
     }
 
+    public Set<Post> getPostSet() {
+        return postSet;
+    }
+
+    public void setPostSet(Set<Post> postSet) {
+        this.postSet = postSet;
+    }
 }
