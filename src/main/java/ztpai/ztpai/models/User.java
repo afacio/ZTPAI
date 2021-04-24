@@ -10,27 +10,22 @@ public class User {
     @Id
     private Long id;
 
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "password")
     private String password;
+
+    @Column(name = "nickName")
     private String nickName;
 
-    @OneToMany
-    @JoinColumn(name = "forumAuthorId")
-    private Set<Forum> forumSet;
-
-    @OneToMany
-    @JoinColumn(name = "topicAuthorId")
-    private Set<Topic> topicSet;
-
-    @OneToMany
-    @JoinColumn(name = "postAuthorId")
-    private Set<Post> postSet;
+    @OneToMany(mappedBy = "author")
+    private Set<Forum> forumsSet;
 
     public User() {
     }
 
     public User(String email, String password, String nickName) {
-
         this.email = email;
         this.password = password;
         this.nickName = nickName;
@@ -69,26 +64,18 @@ public class User {
     }
 
     public Set<Forum> getForumSet() {
-        return forumSet;
+        return forumsSet;
     }
 
     public void setForumSet(Set<Forum> forumSet) {
-        this.forumSet = forumSet;
+        this.forumsSet = forumSet;
     }
 
-    public Set<Topic> getTopicSet() {
-        return topicSet;
+    public Set<Forum> getForumsSet() {
+        return forumsSet;
     }
 
-    public void setTopicSet(Set<Topic> topicSet) {
-        this.topicSet = topicSet;
-    }
-
-    public Set<Post> getPostSet() {
-        return postSet;
-    }
-
-    public void setPostSet(Set<Post> postSet) {
-        this.postSet = postSet;
+    public void setForumsSet(Set<Forum> forumsSet) {
+        this.forumsSet = forumsSet;
     }
 }
