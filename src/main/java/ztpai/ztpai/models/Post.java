@@ -1,27 +1,40 @@
 package ztpai.ztpai.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
 
 @Entity
 public class Post extends Template {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String post;
-    private int like;
+    private String content;
+    private int likes;
+    private int dislikes;
 
 
-    public Post() {
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "topic_id")
+    @JsonBackReference
+    private Topic topic;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "author_id")
+    @JsonBackReference
+    private User author;
+
+    public Post(String content, Topic topic, User author) {
+        this.content = content;
+        this.topic = topic;
+        this.author = author;
+        this.likes = 0;
+        this.dislikes = 0;
     }
 
-    public Post(Long assignedBy, String post) {
-        super(assignedBy);
-        this.post = post;
+    public Post() {
     }
 
     public Long getId() {
@@ -32,19 +45,45 @@ public class Post extends Template {
         this.id = id;
     }
 
-    public String getPost() {
-        return post;
+    public String getContent() {
+        return content;
     }
 
-    public void setPost(String post) {
-        this.post = post;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public int getLike() {
-        return like;
+    public int getLikes() {
+        return likes;
     }
 
-    public void setLike(int like) {
-        this.like = like;
+    public void setLikes(int likes) {
+        this.likes = likes;
     }
+
+    public int getDislikes() {
+        return dislikes;
+    }
+
+    public void setDislikes(int dislikes) {
+        this.dislikes = dislikes;
+    }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+
 }
