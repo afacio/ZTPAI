@@ -1,5 +1,7 @@
 package ztpai.ztpai.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -13,17 +15,21 @@ public class Forum extends Template {
     private String title;
     private String gameAbout;
 
-    @OneToMany
-    @JoinColumn(name = "topicSet")
-    private Set<Topic> topicSet;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "author_id")
+    @JsonBackReference
+    private User author;
+
+    @OneToMany(mappedBy = "forum")
+    private Set<Topic> topicsSet;
 
     public Forum() {
     }
 
-    public Forum(Long assignedBy, String title, String gameAbout) {
-        super(assignedBy);
+    public Forum(String title, String gameAbout, User author) {
         this.title = title;
         this.gameAbout = gameAbout;
+        this.author = author;
     }
 
     public Long getId() {
@@ -50,11 +56,21 @@ public class Forum extends Template {
         this.gameAbout = gameAbout;
     }
 
-    public Set<Topic> getTopicSet() {
-        return topicSet;
+    public User getAuthor() {
+        return author;
     }
 
-    public void setTopicSet(Set<Topic> topicSet) {
-        this.topicSet = topicSet;
+    public void setAuthor(User author) {
+        this.author = author;
     }
+
+    public Set<Topic> getTopicsSet() {
+        return topicsSet;
+    }
+
+    public void setTopicsSet(Set<Topic> topicsSet) {
+        this.topicsSet = topicsSet;
+    }
+
+
 }
