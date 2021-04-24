@@ -2,10 +2,10 @@ package ztpai.ztpai.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ztpai.ztpai.manager.UserService;
 import ztpai.ztpai.models.User;
 import ztpai.ztpai.repository.UserRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -20,7 +20,7 @@ public class  UserApi {
     }
 
     @GetMapping("/getUser")
-    public Iterable<User> getAll() {
+    public List<User> getAll() {
         return userRepository.findAll();
     }
 
