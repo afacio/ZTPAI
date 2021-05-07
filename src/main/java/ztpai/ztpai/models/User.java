@@ -1,9 +1,15 @@
 package ztpai.ztpai.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonMerge;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@JsonIgnoreProperties(value = {"forumsSet"}, allowSetters = false, allowGetters = true)
 public class User {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +26,7 @@ public class User {
     private String nickName;
 
     @OneToMany(mappedBy = "author")
+    @JsonManagedReference
     private Set<Forum> forumsSet;
 
     public User() {
@@ -63,19 +70,14 @@ public class User {
         this.password = password;
     }
 
-    public Set<Forum> getForumSet() {
-        return forumsSet;
-    }
+    public Set<Forum> getForumsSet() { return forumsSet; }
 
-    public void setForumSet(Set<Forum> forumSet) {
-        this.forumsSet = forumSet;
-    }
-
-    public Set<Forum> getForumsSet() {
-        return forumsSet;
+    public void addForum(Forum forum){
+        this.forumsSet.add(forum);
     }
 
     public void setForumsSet(Set<Forum> forumsSet) {
         this.forumsSet = forumsSet;
     }
+
 }
