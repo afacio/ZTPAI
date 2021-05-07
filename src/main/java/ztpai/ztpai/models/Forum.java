@@ -1,11 +1,13 @@
 package ztpai.ztpai.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+
+//@JsonIdentityReference
 public class Forum extends Template {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +22,9 @@ public class Forum extends Template {
     @JsonBackReference
     private User author;
 
+
     @OneToMany(mappedBy = "forum")
+    @JsonManagedReference
     private Set<Topic> topicsSet;
 
     public Forum() {
