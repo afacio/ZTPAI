@@ -1,6 +1,8 @@
 package ztpai.ztpai.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -21,9 +23,9 @@ public class Topic extends Template {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "author_id")
-    @JsonBackReference
     private User author;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "topic")
     private Set<Post> postsSet;
 
@@ -44,9 +46,11 @@ public class Topic extends Template {
         this.id = id;
     }
 
+    @JsonIgnore
     public Forum getForum() {
         return forum;
     }
+
 
     public void setForum(Forum forum) {
         this.forum = forum;
