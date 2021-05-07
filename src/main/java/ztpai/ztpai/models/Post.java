@@ -1,6 +1,7 @@
 package ztpai.ztpai.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
@@ -20,6 +21,7 @@ public class Post extends Template {
     @JoinColumn(name = "topic_id")
     @JsonBackReference
     private Topic topic;
+
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "author_id")
