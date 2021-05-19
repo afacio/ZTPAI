@@ -6,13 +6,11 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-
-//@JsonIdentityReference
 public class Forum extends Template {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long id;
+    private Long forumId;
 
     private String title;
     private String gameAbout;
@@ -36,12 +34,12 @@ public class Forum extends Template {
         this.author = author;
     }
 
-    public Long getId() {
-        return id;
+    public Long getForumId() {
+        return forumId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setForumId(Long id) {
+        this.forumId = id;
     }
 
     public String getTitle() {
