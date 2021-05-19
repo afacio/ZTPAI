@@ -1,9 +1,7 @@
 package ztpai.ztpai.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonMerge;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -14,7 +12,7 @@ public class User {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long id;
+    private Long userId;
 
     @Column(name = "email")
     private String email;
@@ -46,12 +44,12 @@ public class User {
         this.nickName = nickName;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserId(Long id) {
+        this.userId = id;
     }
 
     public String getEmail() {
