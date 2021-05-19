@@ -1,7 +1,6 @@
 package ztpai.ztpai.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
@@ -10,23 +9,21 @@ public class Post extends Template {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long postId;
 
     private String content;
     private int likes;
     private int dislikes;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "author_id")
+    @JsonBackReference
+    private User author;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "topic_id")
     @JsonBackReference
     private Topic topic;
-
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "author_id")
-    @JsonBackReference
-    private User author;
 
     public Post(String content, Topic topic, User author) {
         this.content = content;
@@ -39,12 +36,12 @@ public class Post extends Template {
     public Post() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getPostId() {
+        return postId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPostId(Long postId) {
+        this.postId = postId;
     }
 
     public String getContent() {
