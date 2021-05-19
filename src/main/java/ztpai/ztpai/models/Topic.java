@@ -12,21 +12,22 @@ public class Topic extends Template {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long id;
+    private Long topicId;
 
     private String title;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "author_id")
+    @JsonBackReference
+    private User author;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "forum_id")
     @JsonBackReference
     private Forum forum;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "author_id")
-    private User author;
-
-    @JsonBackReference
     @OneToMany(mappedBy = "topic")
+    @JsonManagedReference
     private Set<Post> postsSet;
 
     public Topic() {
@@ -38,19 +39,18 @@ public class Topic extends Template {
         this.author = author;
     }
 
-    public Long getId() {
-        return id;
+    public Long getTopicId() {
+        return topicId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setTopicId(Long id) {
+        this.topicId = id;
     }
 
-    @JsonIgnore
+    //@JsonIgnore
     public Forum getForum() {
         return forum;
     }
-
 
     public void setForum(Forum forum) {
         this.forum = forum;
