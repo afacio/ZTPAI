@@ -44,7 +44,7 @@ public class Test implements CommandLineRunner {
         Forum forum3 = new Forum("Repentance - items guide", "The Binding of Isaac", user2);
 
         Topic topic1 = new Topic("How to find a diamond in 5 minuts!", forum1, user2);
-        //Post post1 = new Post("I hear about technic, Its true ?", topic1, user1);
+        Post post1 = new Post("I hear about technic, Its true ?", topic1, user1);
 
         //TODO dodać funkcje dodawania forum przez usera
 
@@ -56,6 +56,9 @@ public class Test implements CommandLineRunner {
 //        user2.addForum(forum1);
 //        user2.addForum(forum1);
 
+        forum1.setTopicsSet(Stream.of(topic1).collect(Collectors.toSet()));
+        topic1.setPostsSet(Stream.of(post1).collect(Collectors.toSet()));
+
         userRepository.save(user1);
         userRepository.save(user2);
 
@@ -64,6 +67,6 @@ public class Test implements CommandLineRunner {
         forumRepository.save(forum3);
 
         topicRepository.save(topic1);
-        //postRepository.save(post1);
+        postRepository.save(post1);
     }
 }
