@@ -18,14 +18,14 @@ public class Post extends Template {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "author_id")
     @JsonBackReference
-    private User author;
+    private UserModel author;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "topic_id")
     @JsonBackReference
     private Topic topic;
 
-    public Post(String content, Topic topic, User author) {
+    public Post(String content, Topic topic, UserModel author) {
         this.content = content;
         this.topic = topic;
         this.author = author;
@@ -76,11 +76,11 @@ public class Post extends Template {
         this.topic = topic;
     }
 
-    public User getAuthor() {
+    public UserModel getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(UserModel author) {
         this.author = author;
     }
 
