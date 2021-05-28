@@ -1,35 +1,50 @@
 package ztpai.ztpai.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ztpai.ztpai.models.User;
+
+import ztpai.ztpai.models.UserModel;
 import ztpai.ztpai.repository.UserRepository;
 
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService  {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    public Optional<User> findById(Long id) {
+    public Optional<UserModel> findById(Long id) {
+        //TODO gdy nie ma takiego id
+
         return userRepository.findById(id);
     }
 
-    public Iterable<User> getAll() {
+    public Iterable<UserModel> getAll() {
         return userRepository.findAll();
     }
 
-    public User save(User user) {
-        return userRepository.save(user);
+    public void addUser(UserModel user) {
+        //TODO istnieje już taki użytkownik
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole("ROLE_USER");
+        userRepository.save(user);
     }
 
     public void deleteById(Long id) {
+        //TODO gdy nie ma takiego id
+
         userRepository.deleteById(id);
     }
+
+
 }
