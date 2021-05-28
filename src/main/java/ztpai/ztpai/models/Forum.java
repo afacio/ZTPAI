@@ -18,7 +18,7 @@ public class Forum extends Template {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "author_id")
     @JsonBackReference
-    private User author;
+    private UserModel author;
 
 
     @OneToMany(mappedBy = "forum")
@@ -28,7 +28,7 @@ public class Forum extends Template {
     public Forum() {
     }
 
-    public Forum(String title, String gameAbout, User author) {
+    public Forum(String title, String gameAbout, UserModel author) {
         this.title = title;
         this.gameAbout = gameAbout;
         this.author = author;
@@ -58,11 +58,11 @@ public class Forum extends Template {
         this.gameAbout = gameAbout;
     }
 
-    public User getAuthor() {
+    public UserModel getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(UserModel author) {
         this.author = author;
     }
 
