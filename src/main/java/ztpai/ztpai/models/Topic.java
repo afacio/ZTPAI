@@ -1,7 +1,6 @@
 package ztpai.ztpai.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -19,7 +18,7 @@ public class Topic extends Template {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "author_id")
     @JsonBackReference
-    private User author;
+    private UserModel author;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "forum_id")
@@ -33,7 +32,7 @@ public class Topic extends Template {
     public Topic() {
     }
 
-    public Topic(String title, Forum forum, User author) {
+    public Topic(String title, Forum forum, UserModel author) {
         this.forum = forum;
         this.title = title;
         this.author = author;
@@ -72,11 +71,11 @@ public class Topic extends Template {
         this.postsSet = postsSet;
     }
 
-    public User getAuthor() {
+    public UserModel getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(UserModel author) {
         this.author = author;
     }
 
