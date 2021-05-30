@@ -16,10 +16,12 @@ public class Start {
 
         UserModel u1 = new UserModel("janusz@cebula.pl", "pasat123", "Janusz", "ROLE_ADMIN");
         u1.setPassword(passwordEncoder.encode(u1.getPassword()));
+        u1.setEnable(true);
         userRepository.save(u1);
 
         UserModel u2= new UserModel("bogdan@blotniak.pl", "blotko123", "Bogdan", "ROLE_USER");
         u2.setPassword(passwordEncoder.encode(u2.getPassword()));
+        u2.setEnable(true);
         userRepository.save(u2);
     }
 }
