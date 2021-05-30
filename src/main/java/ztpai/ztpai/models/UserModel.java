@@ -12,7 +12,7 @@ import java.util.Set;
 @Entity
 @Table(name = "USER")
 @JsonIgnoreProperties(value = {"forumsSet"}, allowSetters = false, allowGetters = true)
-public class UserModel {
+public class UserModel { //TODO dodać UserDetails
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -29,6 +29,8 @@ public class UserModel {
 
     @Column(name = "username")
     private String username;
+
+    private boolean isEnable;
 
     @OneToMany(mappedBy = "author")
     @JsonManagedReference
@@ -98,6 +100,14 @@ public class UserModel {
 
     public SimpleGrantedAuthority getAuthorities() {
         return new SimpleGrantedAuthority(role);
+    }
+
+    public boolean isEnable() {
+        return isEnable;
+    }
+
+    public void setEnable(boolean enable) {
+        isEnable = enable;
     }
 
     @Override
