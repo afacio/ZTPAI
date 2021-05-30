@@ -118,6 +118,7 @@ public class UserModel { //TODO dodać UserDetails
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", username='" + username + '\'' +
+                ", isEnable=" + isEnable +
                 ", forumsSet=" + forumsSet +
                 '}';
     }
