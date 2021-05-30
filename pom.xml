@@ -64,6 +64,10 @@
             <artifactId>tomcat-embed-core</artifactId>
             <version>9.0.46</version>
         </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+        </dependency>
 
     </dependencies>
 
