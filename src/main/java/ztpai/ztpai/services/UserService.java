@@ -30,8 +30,16 @@ public class UserService  {
         this.mailService = mailService;
     }
 
-    public Iterable<UserModel> getAll() {
+    public Iterable<UserModel> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    public UserModel getUserById(Long userId){
+        return userRepository.findByUserId(userId).orElseThrow(() -> new UserNotFoundException(userId));
+    }
+
+    public UserModel getUserByUsername(String username){
+        return userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException(username));
     }
 
     public void addUser(UserModel user) {
@@ -46,8 +54,8 @@ public class UserService  {
         }
     }
 
-    public void deleteById(Long id) {
-        userRepository.findById(id).ifPresentOrElse(userModel -> {userRepository.deleteById(id);}, () -> {throw new UserNotFoundException(id);});
+    public void deleteUser(Long userId) {
+        userRepository.findById(userId).ifPresentOrElse(userModel -> {userRepository.deleteById(userId);}, () -> {throw new UserNotFoundException(userId);});
     }
 
     public void updateUser(Long id, UserModel newUser){
@@ -61,10 +69,6 @@ public class UserService  {
         if(newUser.getPassword() != null)oldUser.setPassword(encodePassword(newUser.getPassword()));
 
         userRepository.save(oldUser);
-    }
-
-    public UserModel getById(Long id){
-        return userRepository.findByUserId(id).orElseThrow(() -> new UserNotFoundException(id));
     }
 
     private void sendToken(UserModel userModel) {

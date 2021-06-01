@@ -2,10 +2,7 @@ package ztpai.ztpai.controller;
 
 import org.springframework.web.bind.annotation.*;
 import ztpai.ztpai.models.UserModel;
-import ztpai.ztpai.repository.UserRepository;
 import ztpai.ztpai.services.UserService;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
@@ -19,12 +16,17 @@ public class UserController {
 
     @GetMapping("/getUser")
     public Iterable<UserModel> getAll() {
-        return userService.getAll();
+        return userService.getAllUsers();
     }
 
     @GetMapping("/getUser/{id}")
     public UserModel getById(@PathVariable Long id) {
-        return userService.getById(id);
+        return userService.getUserById(id);
+    }
+
+    @GetMapping("/getUserByUsername/{username}")
+    public UserModel getUserByUsername(@PathVariable String username){
+        return userService.getUserByUsername(username);
     }
 
     @PostMapping("/addUser")
@@ -39,6 +41,6 @@ public class UserController {
 
     @DeleteMapping("/deleteUser/{id}")
     public void deleteById(@PathVariable Long id) {
-        userService.deleteById(id);
+        userService.deleteUser(id);
     }
 }
