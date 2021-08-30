@@ -15,21 +15,21 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
+    @CrossOrigin("http://localhost:4200")
     @GetMapping("/getUser")
     public Iterable<UserModel> getAll() {
         return userService.getAllUsers();
     }
-
-    @GetMapping("/getUserById/{id}")
+    @CrossOrigin("http://localhost:4200")
+    @GetMapping("/getUser/{id}")
     public UserModel getById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
-    @GetMapping("/getUserByUsername/{username}")
-    public UserModel getUserByUsername(@PathVariable String username){
-        return userService.getUserByUsername(username);
-    }
+    // @GetMapping("/getUser/{username}")
+    // public UserModel getUserByUsername(@PathVariable String username){
+    //     return userService.getUserByUsername(username);
+    // }
 
     @PostMapping("/addUser")
     public void addUser(@RequestBody UserModel userModel){

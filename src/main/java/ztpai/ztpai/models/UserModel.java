@@ -3,41 +3,25 @@ package ztpai.ztpai.models;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Entity
 @Table(name = "USER")
-//@JsonIgnoreProperties(value = {"forumsSet"}, allowSetters = false, allowGetters = true)
-public class UserModel { //TODO dodać UserDetails
+public class UserModel { 
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long userId;
 
-   // @Column(name = "role")
     private String role;
 
-   // @Column(name = "email")
     private String email;
 
-   // @Column(name = "password")
     private String password;
 
-   // @Column(name = "username")
     private String username;
 
-
-    //@Column(name = "forumIdList")
-    @ElementCollection
-    private List<Long> forumIdList;
-
-    //@Column(name = "isTokenActivated")
     private boolean isEnable;
-
-//    @OneToMany(mappedBy = "author")
-//    @JsonManagedReference
-//    private Set<Forum> forumsSet;
 
     public UserModel() {
     }
@@ -49,7 +33,6 @@ public class UserModel { //TODO dodać UserDetails
         this.role = role;
         if(role == null)
             this.role = "ROLE_USER";
-        this.forumIdList = new ArrayList<>();
     }
 
     public String getUsername() {
@@ -84,16 +67,6 @@ public class UserModel { //TODO dodać UserDetails
         this.password = password;
     }
 
-//    public Set<Forum> getForumsSet() { return forumsSet; }
-//
-//    public void addForum(Forum forum){
-//        this.forumsSet.add(forum);
-//    }
-//
-//    public void setForumsSet(Set<Forum> forumsSet) {
-//        this.forumsSet = forumsSet;
-//    }
-
     public String getRole() {
         return role;
     }
@@ -112,17 +85,5 @@ public class UserModel { //TODO dodać UserDetails
 
     public void setEnable(boolean enable) {
         isEnable = enable;
-    }
-
-    public List<Long> getForumIdList() {
-        return forumIdList;
-    }
-
-    public void setForumIdList(List<Long> forumIdList) {
-        this.forumIdList = forumIdList;
-    }
-
-    public void setForumIdListElement(Long id){
-        forumIdList.add(id);
     }
 }

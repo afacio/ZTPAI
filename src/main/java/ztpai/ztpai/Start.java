@@ -31,8 +31,7 @@ public class Start {
         Forum f1 = new Forum("test","test",u1);
         forumRepository.save(f1);
 
-        u1.setForumIdListElement(1L);
-        userRepository.save(u1);
+        
 
 
     }

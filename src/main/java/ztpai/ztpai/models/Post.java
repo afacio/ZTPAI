@@ -14,21 +14,12 @@ public class Post extends Template {
     private String content;
     private int likes;
     private int dislikes;
+    
+    private Long topicId;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "author_id")
-    @JsonBackReference
-    private UserModel author;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "topic_id")
-    @JsonBackReference
-    private Topic topic;
-
-    public Post(String content, Topic topic, UserModel author) {
+    public Post(Topic topic, String content, UserModel author) {
+        this.topicId = topic.getTopicId();
         this.content = content;
-        this.topic = topic;
-        this.author = author;
         this.likes = 0;
         this.dislikes = 0;
     }
@@ -68,21 +59,12 @@ public class Post extends Template {
         this.dislikes = dislikes;
     }
 
-    public Topic getTopic() {
-        return topic;
+    public Long getTopicId() {
+        return topicId;
     }
 
     public void setTopic(Topic topic) {
-        this.topic = topic;
+        this.topicId = topic.getTopicId();
     }
-
-    public UserModel getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(UserModel author) {
-        this.author = author;
-    }
-
 
 }
