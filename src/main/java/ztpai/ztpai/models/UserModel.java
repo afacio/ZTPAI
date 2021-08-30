@@ -1,40 +1,43 @@
 package ztpai.ztpai.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
-import java.util.Collections;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "USER")
-@JsonIgnoreProperties(value = {"forumsSet"}, allowSetters = false, allowGetters = true)
+//@JsonIgnoreProperties(value = {"forumsSet"}, allowSetters = false, allowGetters = true)
 public class UserModel { //TODO dodać UserDetails
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long userId;
 
-    @Column(name = "role")
+   // @Column(name = "role")
     private String role;
 
-    @Column(name = "email")
+   // @Column(name = "email")
     private String email;
 
-    @Column(name = "password")
+   // @Column(name = "password")
     private String password;
 
-    @Column(name = "username")
+   // @Column(name = "username")
     private String username;
 
+
+    //@Column(name = "forumIdList")
+    @ElementCollection
+    private List<Long> forumIdList;
+
+    //@Column(name = "isTokenActivated")
     private boolean isEnable;
 
-    @OneToMany(mappedBy = "author")
-    @JsonManagedReference
-    private Set<Forum> forumsSet;
+//    @OneToMany(mappedBy = "author")
+//    @JsonManagedReference
+//    private Set<Forum> forumsSet;
 
     public UserModel() {
     }
@@ -46,6 +49,7 @@ public class UserModel { //TODO dodać UserDetails
         this.role = role;
         if(role == null)
             this.role = "ROLE_USER";
+        this.forumIdList = new ArrayList<>();
     }
 
     public String getUsername() {
@@ -80,15 +84,15 @@ public class UserModel { //TODO dodać UserDetails
         this.password = password;
     }
 
-    public Set<Forum> getForumsSet() { return forumsSet; }
-
-    public void addForum(Forum forum){
-        this.forumsSet.add(forum);
-    }
-
-    public void setForumsSet(Set<Forum> forumsSet) {
-        this.forumsSet = forumsSet;
-    }
+//    public Set<Forum> getForumsSet() { return forumsSet; }
+//
+//    public void addForum(Forum forum){
+//        this.forumsSet.add(forum);
+//    }
+//
+//    public void setForumsSet(Set<Forum> forumsSet) {
+//        this.forumsSet = forumsSet;
+//    }
 
     public String getRole() {
         return role;
@@ -110,16 +114,15 @@ public class UserModel { //TODO dodać UserDetails
         isEnable = enable;
     }
 
-    @Override
-    public String toString() {
-        return "UserModel{" +
-                "userId=" + userId +
-                ", role='" + role + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", username='" + username + '\'' +
-                ", isEnable=" + isEnable +
-                ", forumsSet=" + forumsSet +
-                '}';
+    public List<Long> getForumIdList() {
+        return forumIdList;
+    }
+
+    public void setForumIdList(List<Long> forumIdList) {
+        this.forumIdList = forumIdList;
+    }
+
+    public void setForumIdListElement(Long id){
+        forumIdList.add(id);
     }
 }
