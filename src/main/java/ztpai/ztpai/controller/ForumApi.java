@@ -1,6 +1,6 @@
 package ztpai.ztpai.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.*;
 import ztpai.ztpai.models.Forum;
 import ztpai.ztpai.repository.ForumRepository;
@@ -13,7 +13,6 @@ public class ForumApi {
 
     private ForumRepository forumRepository;
 
-    @Autowired
     public ForumApi(ForumRepository forumRepository) {
         this.forumRepository = forumRepository;
     }
