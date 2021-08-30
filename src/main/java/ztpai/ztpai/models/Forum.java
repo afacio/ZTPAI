@@ -3,6 +3,8 @@ package ztpai.ztpai.models;
 import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,23 +17,36 @@ public class Forum extends Template {
     private String title;
     private String gameAbout;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "author_id")
-    @JsonBackReference
-    private UserModel author;
+    @ElementCollection
+    private List<Long> listOfUserModerators;
 
+    @ElementCollection
+    private List<Long> listOfUserAdministrators;
 
-    @OneToMany(mappedBy = "forum")
-    @JsonManagedReference
-    private Set<Topic> topicsSet;
+    @ElementCollection
+    private List<Long> topicIdList;
+
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "author_id")
+//    @JsonBackReference
+//    private UserModel author;
+
+//    @OneToMany(mappedBy = "forum")
+//    @JsonManagedReference
+//    private Set<Topic> topicsSet;
 
     public Forum() {
     }
 
     public Forum(String title, String gameAbout, UserModel author) {
+
+        this.listOfUserAdministrators = new ArrayList<>();
+        this.listOfUserModerators = new ArrayList<>();
+        this.topicIdList = new ArrayList<>();
+
         this.title = title;
         this.gameAbout = gameAbout;
-        this.author = author;
+        this.listOfUserAdministrators.add(author.getUserId());
     }
 
     public Long getForumId() {
@@ -58,21 +73,49 @@ public class Forum extends Template {
         this.gameAbout = gameAbout;
     }
 
-    public UserModel getAuthor() {
-        return author;
+    public List<Long> getListOfUserModerators() {
+        return listOfUserModerators;
     }
 
-    public void setAuthor(UserModel author) {
-        this.author = author;
+    public void setListOfUserModerators(List<Long> listOfUserModerators) {
+        this.listOfUserModerators = listOfUserModerators;
     }
 
-    public Set<Topic> getTopicsSet() {
-        return topicsSet;
+    public List<Long> getListOfUserAdministrators() {
+        return listOfUserAdministrators;
     }
 
-    public void setTopicsSet(Set<Topic> topicsSet) {
-        this.topicsSet = topicsSet;
+    public void setListOfUserAdministrators(List<Long> listOfUserAdministrators) {
+        this.listOfUserAdministrators = listOfUserAdministrators;
     }
+
+    public List<Long> getTopicIdList() {
+        return topicIdList;
+    }
+
+    public void setTopicIdList(List<Long> topicIdList) {
+        this.topicIdList = topicIdList;
+    }
+
+    public void addTopicToForum(Long topicId){
+        this.topicIdList.add(topicId);
+    }
+
+//    public UserModel getAuthor() {
+//        return author;
+//    }
+//
+//    public void setAuthor(UserModel author) {
+//        this.author = author;
+//    }
+//
+//    public Set<Topic> getTopicsSet() {
+//        return topicsSet;
+//    }
+//
+//    public void setTopicsSet(Set<Topic> topicsSet) {
+//        this.topicsSet = topicsSet;
+//    }
 
 
 }
