@@ -48,16 +48,16 @@ public class Test implements CommandLineRunner {
 
         //TODO dodać funkcje dodawania forum przez usera
 
-        userModel1.setForumsSet(Stream.of(forum1).collect(Collectors.toSet()));
-        userModel2.setForumsSet(Stream.of(forum2).collect(Collectors.toSet()));
-        userModel2.setForumsSet(Stream.of(forum3).collect(Collectors.toSet()));
+//        userModel1.setForumsSet(Stream.of(forum1).collect(Collectors.toSet()));
+//        userModel2.setForumsSet(Stream.of(forum2).collect(Collectors.toSet()));
+//        userModel2.setForumsSet(Stream.of(forum3).collect(Collectors.toSet()));
 
 //        user1.addForum(forum1);
 //        user2.addForum(forum1);
 //        user2.addForum(forum1);
 
-        forum1.setTopicsSet(Stream.of(topic1).collect(Collectors.toSet()));
-        topic1.setPostsSet(Stream.of(post1).collect(Collectors.toSet()));
+//        forum1.setTopicsSet(Stream.of(topic1).collect(Collectors.toSet()));
+//        topic1.setPostsSet(Stream.of(post1).collect(Collectors.toSet()));
 
         userRepository.save(userModel1);
         userRepository.save(userModel2);
