@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.*;
 import ztpai.ztpai.models.UserModel;
 import ztpai.ztpai.services.UserService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
@@ -19,7 +21,7 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/getUser/{id}")
+    @GetMapping("/getUserById/{id}")
     public UserModel getById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
@@ -42,5 +44,15 @@ public class UserController {
     @DeleteMapping("/deleteUser/{id}")
     public void deleteById(@PathVariable Long id) {
         userService.deleteUser(id);
+    }
+
+    @GetMapping("getUserForumIdList/{id}")
+    public List<Long> getUserForumIdList(@PathVariable Long id){
+        return userService.getUserForumIdList(id);
+    }
+
+    @PostMapping("addForumIdToList/{userId}/{forumId}")
+    public void addForumIdToList(@PathVariable Long userId, @PathVariable Long forumId){
+        userService.addForumIdToList(userId, forumId);
     }
 }
