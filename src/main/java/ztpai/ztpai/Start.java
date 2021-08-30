@@ -3,16 +3,20 @@ package ztpai.ztpai;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import ztpai.ztpai.models.Forum;
 import ztpai.ztpai.models.UserModel;
+import ztpai.ztpai.repository.ForumRepository;
 import ztpai.ztpai.repository.UserRepository;
 
 @Configuration
 public class Start {
 
     private final UserRepository userRepository;
+    private final ForumRepository forumRepository;
 
-    public Start(UserRepository userRepository, PasswordEncoder passwordEncoder){
+    public Start(UserRepository userRepository, ForumRepository forumRepository, PasswordEncoder passwordEncoder){
         this.userRepository = userRepository;
+        this.forumRepository = forumRepository;
 
         UserModel u1 = new UserModel("janusz@cebula.pl", "pasat123", "Janusz", "ROLE_ADMIN");
         u1.setPassword(passwordEncoder.encode(u1.getPassword()));
@@ -23,5 +27,13 @@ public class Start {
         u2.setPassword(passwordEncoder.encode(u2.getPassword()));
         u2.setEnable(true);
         userRepository.save(u2);
+
+        Forum f1 = new Forum("test","test",u1);
+        forumRepository.save(f1);
+
+        u1.setForumIdListElement(1L);
+        userRepository.save(u1);
+
+
     }
 }
