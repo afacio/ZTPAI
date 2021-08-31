@@ -6,4 +6,5 @@ import ztpai.ztpai.models.Topic;
 
 @Repository
 public interface TopicRepository extends JpaRepository<Topic, Long> {
+  Topic getTopicByTopicId(Long topicId);
 }

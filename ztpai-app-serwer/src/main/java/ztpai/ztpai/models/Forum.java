@@ -11,17 +11,19 @@ public class Forum extends Template {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long forumId;
+    
     private String title;
     private String gameAbout;
 
-    //private List<Topic> topicList;
+    @OneToMany
+    private List<Topic> topicList;
 
 
     public Forum() {
     }
 
-    public Forum(String title, String gameAbout, UserModel author) {
-        //this.topicList = new ArrayList<>();
+    public Forum(String title, String gameAbout) {
+        this.topicList = new ArrayList<>();
         this.title = title;
         this.gameAbout = gameAbout;
     }
@@ -50,16 +52,16 @@ public class Forum extends Template {
         this.gameAbout = gameAbout;
     }
 
-    // public List<Topic> getTopicList() {
-    //     return topicList;
-    // }
+    public List<Topic> getTopicList() {
+        return topicList;
+    }
 
-    // public void addTopicToList(Topic topic){
-    //     this.topicList.add(topic);
-    // }
+    public void addTopicToList(Topic topic){
+        this.topicList.add(topic);
+    }
 
-    // public void deleteTopicFromList(Topic topic){
-    //     this.topicList.remove(topic);
-    // }
+    public void deleteTopicFromList(Topic topic){
+        this.topicList.remove(topic);
+    }
 
 }

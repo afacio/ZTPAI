@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-//import java.util.Set;
+
+import java.util.List;
+
 
 @Entity
 public class Topic extends Template {
@@ -12,15 +14,19 @@ public class Topic extends Template {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long topicId;
+    
     private String title;
     private Long forumId;
 
-    //private Set<Post> postsSet;
+    @OneToMany
+    @Column
+    @ElementCollection
+    private List<Post> postsList;
 
     public Topic() {
     }
 
-    public Topic(String title, Forum forum, UserModel author) {
+    public Topic(String title, Forum forum) {
         this.forumId = forum.getForumId();
         this.title = title;
     }
@@ -49,8 +55,16 @@ public class Topic extends Template {
         this.title = title;
     }
 
-    // public Set<Post> getPostsSet() {
-    //     return postsSet;
-    // }
+    public List<Post> getPostList() {
+        return postsList;
+    }
+
+    public void addPostsToList(Post post){
+        this.postsList.add(post);
+    }
+
+    public void deletePostsFromList(Post post){
+        this.postsList.remove(post);
+    }
 
 }
