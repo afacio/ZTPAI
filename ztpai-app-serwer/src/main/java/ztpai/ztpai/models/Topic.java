@@ -19,8 +19,6 @@ public class Topic extends Template {
     private Long forumId;
 
     @OneToMany
-    @Column
-    @ElementCollection
     private List<Post> postsList;
 
     public Topic() {
