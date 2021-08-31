@@ -46,13 +46,13 @@ public class UserController {
         userService.deleteUser(id);
     }
 
-    @GetMapping("getUserForumIdList/{id}")
-    public List<Long> getUserForumIdList(@PathVariable Long id){
-        return userService.getUserForumIdList(id);
-    }
+    // @GetMapping("getUserForumIdList/{id}")
+    // public List<Long> getUserForumIdList(@PathVariable Long id){
+    //     return userService.getUserForumIdList(id);
+    // }
 
-    @PostMapping("addForumIdToList/{userId}/{forumId}")
-    public void addForumIdToList(@PathVariable Long userId, @PathVariable Long forumId){
-        userService.addForumIdToList(userId, forumId);
-    }
+    // @PostMapping("addForumIdToList/{userId}/{forumId}")
+    // public void addForumIdToList(@PathVariable Long userId, @PathVariable Long forumId){
+    //     userService.addForumIdToList(userId, forumId);
+    // }
 }
