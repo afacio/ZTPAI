@@ -11,7 +11,7 @@ public class UserExistsAdvice {
 
     @ResponseBody
     @ExceptionHandler(UserExistsException.class)
-    @ResponseStatus(HttpStatus.CREATED) //TODO sprawdzić czy jest ot doby wyjątek
+    @ResponseStatus(HttpStatus.CREATED) 
     public String userExistsHandler(UserExistsException ex) {
         return ex.getMessage();
     }

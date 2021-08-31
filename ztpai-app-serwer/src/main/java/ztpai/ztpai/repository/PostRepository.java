@@ -6,4 +6,5 @@ import ztpai.ztpai.models.Post;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
+  Post getPostByPostId(Long postId);
 }

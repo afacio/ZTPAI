@@ -17,7 +17,7 @@ public class Post extends Template {
     
     private Long topicId;
 
-    public Post(Topic topic, String content, UserModel author) {
+    public Post(String content, Topic topic) {
         this.topicId = topic.getTopicId();
         this.content = content;
         this.likes = 0;
